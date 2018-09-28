@@ -53,27 +53,6 @@ def compute_gravity(G=0,masses=[],coords='',distances=''):
 
     return accelerations
 
-# @jit(parallel=True)
-# def compute_gravity(G=0,masses=[],coords='',distances='',acc=''):
-#     for i in range(len(masses)-2):
-#         for j in range(i+1,len(masses)-1):
-#             if coords[i][0] < coords[j][0] and coords[i][1] < coords[j][1]:
-#                 fx = gforce(G,coords[j][0],coords[i][0],distances[i,j],masses[i],masses[j])
-#                 fy = gforce(G,coords[j][1],coords[i][1],distances[i,j],masses[i],masses[j])
-#             if coords[i][0] > coords[j][0] and coords[i][1] < coords[j][1]:
-#                 fx = -gforce(G,coords[i][0],coords[j][0],distances[i,j],masses[i],masses[j])
-#                 fy = gforce(G,coords[j][1],coords[i][1],distances[i,j],masses[i],masses[j])
-#             if coords[i][0] > coords[j][0] and coords[i][1] > coords[j][1]:
-#                 fx = -gforce(G,coords[i][0],coords[j][0],distances[i,j],masses[i],masses[j])
-#                 fy = -gforce(G,coords[i][1],coords[j][1],distances[i,j],masses[i],masses[j])
-#             if coords[i][0] < coords[j][0] and coords[i][1] > coords[j][1]:
-#                 fx = gforce(G,coords[j][0],coords[i][0],distances[i,j],masses[i],masses[j])
-#                 fy = -gforce(G,coords[i][1],coords[j][1],distances[i,j],masses[i],masses[j])
-#             acc[i]+=np.array([fx/masses[i],fy/masses[i]])
-#             acc[j]-=np.array([fx/masses[j],fy/masses[j]])
-#     return acc
-
-
 class World:
 
     def __init__(self):
@@ -110,12 +89,8 @@ class Sim:
 
         [p.move() for p in self.particles]
 
-    def process_flags(self):
-        pass
-
     def time_step(self):
         self.apply_gravity()
-        self.process_flags()
 
 class Particle:
 

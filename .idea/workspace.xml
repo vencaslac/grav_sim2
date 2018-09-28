@@ -32,13 +32,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/scipy/spatial/distance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
+            <state relative-caret-position="2474">
               <caret line="2166" column="39" selection-start-line="2166" selection-start-column="30" selection-end-line="2166" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>dm =</find>
+      <find>return</find>
+      <find>cdist_fn</find>
+      <find>euclidean</find>
+    </findStrings>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
@@ -129,7 +137,7 @@
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/scipy/spatial/distance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
+        <state relative-caret-position="2474">
           <caret line="2166" column="39" selection-start-line="2166" selection-start-column="30" selection-end-line="2166" selection-end-column="39" />
         </state>
       </provider>

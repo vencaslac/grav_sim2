@@ -1,18 +1,51 @@
+import pygame
+
 from utils import *
+
 
 class World:
 
     def __init__(self):
-        self.cfg=json.loads(open('settings.cfg','rt').read())
+        self.cfg=json.load(open('settings.cfg'))
+        self.sim=self.configure_sim()
+        self.display=self.init_display()
+
+    def configure_sim(self):
+        return Sim(int(self.cfg['Sim']['Particles']['N_PARTS']),\
+                    int(self.cfg['Sim']['Particles']['SPREAD']),\
+                    float(self.cfg['Sim']['Physics']['G']))
+
+    def init_display(self):
+        pygame.init()
+        modes = pygame.HWSURFACE | pygame.HWACCEL
+        if self.cfg['Graphics']['full_screen'] == 'Yes':
+            modes = modes | pygame.FULLSCREEN
+        if self.cfg['Graphics']['borderless'] == 'Yes':
+            modes = modes | pygame.NOFRAME
+
+        win_size=self.cfg['Graphics']['window_size'].split(',')
+        win_size=[int(item) for item in win_size]
+
+        return pygame.display.set_mode(win_size,modes)
+
+    def update(self):
+        self.sim.time_step()
+        self.display.fill((0,0,0))
+        for p in self.sim.particles:
+            try:
+                p.draw(self.display)
+            except:
+                pass
+        pygame.display.update()
 
 class Sim:
 
-    def __init__(self,N_PARTS=0,SPREAD=0):
+    def __init__(self,N_PARTS=0,SPREAD=0,G=0):
         self.N_PARTS=N_PARTS
         self.SPREAD=SPREAD
         self.particles=[Particle(str(i),np.array((float(randint(0,self.SPREAD)),float(randint(0,self.SPREAD)))),
                         randint(1,255),1) for i in range(self.N_PARTS)]
-        self.G=1#6.674e-11
+        self.G=G#6.674e-11
         self.flags={
                     'show_field':False,
                     'show_forces':False,

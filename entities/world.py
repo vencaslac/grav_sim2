@@ -9,6 +9,7 @@ class World:
         self.cfg=json.load(open('settings.cfg'))
         self.sim=self.configure_sim()
         self.display=self.init_display()
+        self.cpos=(0,0)
 
     def configure_sim(self):
         ''' instantiates the simulation based on parameters given in
@@ -42,7 +43,7 @@ class World:
         self.display.fill((0,0,0))
         for p in self.sim.particles:
             try:
-                p.draw(self.display)
+                p.draw(self.display,self.cpos)
             except:
                 pass
         pygame.display.update()

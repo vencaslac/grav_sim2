@@ -18,9 +18,9 @@ class Particle:
         self.vel=self.vel+self.acc
         self.coords=self.coords+self.vel
 
-    def draw(self,surface):
+    def draw(self,surface,cpos):
         pygame.draw.circle(surface,
                             self.color,
-                            (int(round(self.coords[0])),int(round(self.coords[1]))),
+                            (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
                             int(self.radius)
                         )

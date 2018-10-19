@@ -1,9 +1,9 @@
-import classes
+import entities.world as world
 import time
 import os
 import pygame
 
-w=classes.World()
+w=world.World()
 egzit=False
 while not egzit:
     now=time.time()

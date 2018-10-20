@@ -42,6 +42,12 @@ while not egzit:
                 else:
                     w.camera_lock=True
                 pressed = True
+            elif event.key == pygame.K_g and pressed == False:
+                if w.show_grid:
+                    w.show_grid=False
+                else:
+                    w.show_grid=True
+                pressed = True
 
 
 

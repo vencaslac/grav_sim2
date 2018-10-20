@@ -6,13 +6,14 @@ from .particle import *
 class World:
 
     def __init__(self):
-        self.cfg=json.load(open('settings.cfg'))
-        self.win_size=[int(item) for item in self.cfg['Graphics']['window_size'].split(',')]
-        self.sim=self.configure_sim()
-        self.display=self.init_display()
-        self.cpos=(0,0)
-        self.focus_particle=-1
-        self.camera_lock=False
+        self.cfg = json.load(open('settings.cfg'))
+        self.win_size = [int(item) for item in self.cfg['Graphics']['window_size'].split(',')]
+        self.sim = self.configure_sim()
+        self.display = self.init_display()
+        self.cpos = (0,0)
+        self.focus_particle = -1
+        self.camera_lock = False
+        self.show_grid = self.cfg['App']['show_grid']=='True'
 
     def configure_sim(self):
         ''' instantiates the simulation based on parameters given in
@@ -44,9 +45,22 @@ class World:
         '''updates the display'''
         self.sim.time_step()
         self.display.fill((0,0,0))
+
         if self.camera_lock:
             self.cpos = (int(round(self.sim.particles[self.focus_particle].coords[0]-self.win_size[0]//2)),\
                          int(round(self.sim.particles[self.focus_particle].coords[1]-self.win_size[1]//2)))
+
+        if self.show_grid:
+            wx=self.win_size[0]
+            wy=self.win_size[1]
+            for i in range(int(self.cpos[0]),int(self.cpos[0])+wx):
+                if i%600 == 0:
+                    pygame.draw.line(self.display,(105,105,125),(i-self.cpos[0],0),(i-self.cpos[0],wx*2),3)
+            for i in range(int(self.cpos[1]),int(self.cpos[1])+wy):
+                if i%600 == 0:
+                    pygame.draw.line(self.display,(105,105,125),(0,i-self.cpos[1]),(wy*2,i-self.cpos[1]),3)
+
+
         for p in self.sim.particles:
             try:
                 p.draw(self.display,self.cpos)

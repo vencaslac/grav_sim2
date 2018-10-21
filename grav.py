@@ -48,10 +48,12 @@ while not egzit:
                 else:
                     w.show_grid=True
                 pressed = True
-
-
-
-    print('{}|{}|{}'.format(str(w.cpos),str(w.sim.particles[testpar].coords),str(w.win_size)))
+            elif event.key == pygame.K_f and pressed == False:
+                if w.show_forces:
+                    w.show_forces=False
+                else:
+                    w.show_forces=True
+                pressed = True
 
     w.update()
 

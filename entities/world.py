@@ -14,6 +14,7 @@ class World:
         self.focus_particle = -1
         self.camera_lock = False
         self.show_grid = self.cfg['App']['show_grid']=='True'
+        self.show_forces = self.cfg['App']['show_forces']=='True'
 
     def configure_sim(self):
         ''' instantiates the simulation based on parameters given in
@@ -64,6 +65,11 @@ class World:
         for p in self.sim.particles:
             try:
                 p.draw(self.display,self.cpos)
+                if self.show_forces:
+                    try:
+                        p.draw_forces(self.display,self.cpos)
+                    except:
+                        pass
             except:
                 pass
         pygame.display.update()

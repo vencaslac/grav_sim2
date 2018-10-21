@@ -1,15 +1,7 @@
-import classes
 import time
 import os
+from random import randint
 
-S=classes.Sim(5,1500)
 
-print(S.coords)
-
-while True:
-    now=time.time()
-    S.apply_gravity()
-    S.move()
-    os.system('cls')
-    print(time.time()-now)
-    print(S.coords)
+for i in range(800):
+    print(min(765,round(int(765*randint(1,765)/randint(1,765)**2))+1))

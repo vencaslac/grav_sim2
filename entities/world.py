@@ -23,6 +23,8 @@ class World:
 
         return Sim(int(self.cfg['Sim']['Particles']['N_PARTS']),\
                     int(self.cfg['Sim']['Particles']['SPREAD']),\
+                    int(self.cfg['Sim']['Particles']['M_SPREAD']),\
+                    int(self.cfg['Sim']['Particles']['D_SPREAD']),\
                     float(self.cfg['Sim']['Physics']['G']))
 
     def init_display(self):
@@ -66,8 +68,8 @@ class World:
             if p.coords[0]<self.cpos[0]+self.win_size[0] and p.coords[1]<self.cpos[1]+self.win_size[1]:
                 on_screen.append(self.sim.particles.index(p))
 
-        [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen]
+        [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen.__iter__()]
         if self.show_forces:
-            [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen]
+            [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen.__iter__()]
 
         pygame.display.update()

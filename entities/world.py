@@ -55,21 +55,19 @@ class World:
             wx=self.win_size[0]
             wy=self.win_size[1]
             for i in range(int(self.cpos[0]),int(self.cpos[0])+wx):
-                if i%600 == 0:
+                if i%500 == 0:
                     pygame.draw.line(self.display,(105,105,125),(i-self.cpos[0],0),(i-self.cpos[0],wx*2),3)
             for i in range(int(self.cpos[1]),int(self.cpos[1])+wy):
-                if i%600 == 0:
+                if i%500 == 0:
                     pygame.draw.line(self.display,(105,105,125),(0,i-self.cpos[1]),(wy*2,i-self.cpos[1]),3)
 
-
+        on_screen=[]
         for p in self.sim.particles:
-            try:
-                p.draw(self.display,self.cpos)
-                if self.show_forces:
-                    try:
-                        p.draw_forces(self.display,self.cpos)
-                    except:
-                        pass
-            except:
-                pass
+            if p.coords[0]<self.cpos[0]+self.win_size[0] and p.coords[1]<self.cpos[1]+self.win_size[1]:
+                on_screen.append(self.sim.particles.index(p))
+
+        [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen]
+        if self.show_forces:
+            [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen]
+
         pygame.display.update()

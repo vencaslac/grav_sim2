@@ -10,7 +10,7 @@ testpar=-1
 while not egzit:
     now=time.time()
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == pygame.K_q:
+        if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
             egzit = True
         elif event.type == pygame.KEYDOWN:
             pressed = False

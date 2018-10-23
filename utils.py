@@ -1,11 +1,6 @@
-import os
-import json
-from random import randint
-
 import numpy as np
-import pygame
 import math
-from numba import jit,njit,cuda
+from numba import jit
 from scipy.spatial.distance import cdist,euclidean
 
 

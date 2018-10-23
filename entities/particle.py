@@ -4,15 +4,33 @@ import math
 
 class Particle:
 
-    def __init__(self,name='',coords=np.array([0,0]),mass=0,density=0):
+    def __init__(self,name='',coords=np.array([0,0]),mass=0,density=0,G=0):
         self.name = name
         self.coords = coords
+        self.density = min(density,mass)
         self.mass = mass
-        self.density = density
-        self.color=(255,255,255)
         self.radius=math.sqrt(self.mass/self.density)
+        self.temperature=min(765,self.compute_temp(G))
+        self.color=self.compute_color()
         self.vel=np.array([0,0])
         self.acc=np.array([0,0])
+
+    def compute_color(self):
+        red = max(0,int(255-self.temperature))
+
+        blue = min(255,int(self.temperature))
+
+        green = 0#(red+blue)//2
+
+        color=(red,green,blue)
+        return color
+
+    def compute_temp(self,G):
+        G=G
+        M=1
+        R=8.314
+        r= self.radius
+        return (G*M*self.mass)/(R*r)
 
     def move(self):
         self.vel=self.vel+self.acc

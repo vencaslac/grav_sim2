@@ -47,7 +47,7 @@ class World:
     def update(self):
         '''updates the display'''
         self.sim.time_step()
-        self.display.fill((0,0,0))
+        self.display.fill((0,50,100))
 
         if self.camera_lock:
             self.cpos = (int(round(self.sim.particles[self.focus_particle].coords[0]-self.win_size[0]//2)),\

@@ -10,17 +10,36 @@ class Particle:
         self.density = min(density,mass)
         self.mass = mass
         self.radius=math.sqrt(self.mass/self.density)
-        self.temperature=min(765,self.compute_temp(G))
+        self.temperature=self.compute_temp(G)
         self.color=self.compute_color()
         self.vel=np.array([0,0])
         self.acc=np.array([0,0])
 
     def compute_color(self):
-        red = max(0,int(255-self.temperature))
-
-        blue = min(255,int(self.temperature))
-
-        green = 0#(red+blue)//2
+        if self.temperature < 255:
+            red = int(self.temperature)
+            green = 0
+            blue = 0
+        elif self.temperature >= 255 and self.temperature < 510:
+            red = 255
+            green = int(self.temperature - 255)
+            blue = 0
+        elif self.temperature >= 510 and self.temperature < 765:
+            red = 255
+            green = 255
+            blue = int(self.temperature - 510)
+        elif self.temperature >= 765 and self.temperature < 1020:
+            red = int(255 - (1020 - self.temperature))
+            green = 255
+            blue = 255
+        elif self.temperature >= 1020 and self.temperature < 1275:
+            red = 0
+            green = int(255 - (1275 - self.temperature))
+            blue = 255
+        elif self.temperature > 1275:
+            red = 0
+            green = 0
+            blue=255
 
         color=(red,green,blue)
         return color

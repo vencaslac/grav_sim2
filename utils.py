@@ -1,6 +1,7 @@
 import numpy as np
 import math
 from numba import jit
+import pygame
 from scipy.spatial.distance import cdist,euclidean
 
 
@@ -33,6 +34,20 @@ def build_field(g,masses,pixels,coords):
                 p[i,j]=np.int(g_from_part(g,masses[k],distances[k])*10e10)
 
     return p
+
+#@jit(parallel=True)
+def generate_sprite(taip='star',radius=0,surface_radius=0,sprite=np.array,color=(0,0,0,0)):
+    sprite=sprite
+    for i in range(sprite.shape[0]):
+        for j in range(sprite.shape[1]):
+            scale=((i-radius)**2+(j-radius)**2)**0.5/radius
+            if scale >= 1:
+                continue
+            else:
+                for k in range(3):
+                    sprite[i,j,k]=color[k]-color[k]*scale
+
+    return sprite
 
 @jit(parallel=True)
 def compute_gravity(G=0,masses=[],coords='',distances=''):

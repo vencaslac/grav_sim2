@@ -1,6 +1,8 @@
 import numpy as np
 import pygame
 import math
+from utils import *
+
 
 class Particle:
 
@@ -12,6 +14,7 @@ class Particle:
         self.radius=math.sqrt(self.mass/self.density)
         self.temperature=self.compute_temp(G)
         self.color=self.compute_color()
+        self.sprite=self.build_sprite()
         self.vel=np.array([0,0])
         self.acc=np.array([0,0])
 
@@ -41,8 +44,15 @@ class Particle:
             green = 0
             blue=255
 
-        color=(red,green,blue)
+        color=(red,green,blue,0)
         return color
+
+    def build_sprite(self):
+        sp=np.zeros((int(round(self.radius*2)),int(round(self.radius*2)),3))
+        srf = pygame.surfarray.make_surface(generate_sprite('star',self.radius,0,sp,self.color))
+        #srf.flags = pygame.SRCALPHA
+
+        return srf
 
     def compute_temp(self,G):
         G=G
@@ -56,11 +66,13 @@ class Particle:
         self.coords=self.coords+self.vel
 
     def draw(self,surface,cpos):
-        pygame.draw.circle(surface,
-                            self.color,
-                            (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
-                            int(self.radius)
-                        )
+        # pygame.draw.circle(surface,
+        #                     self.color,
+        #                     (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
+        #                     int(self.radius)
+        #                 )
+        surface.blit(self.sprite,(int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))))
+
     def draw_forces(self,surface,cpos):
         fx=self.mass*self.acc[0]
         fy=self.mass*self.acc[1]

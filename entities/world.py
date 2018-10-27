@@ -68,7 +68,6 @@ class World:
             if p.coords[0]<self.cpos[0]+self.win_size[0] and p.coords[1]<self.cpos[1]+self.win_size[1]:
                 on_screen.append(self.sim.particles.index(p))
 
-        self.sim.particles[self.focus_particle].sprite=self.sim.particles[self.focus_particle].build_sprite()
         [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen.__iter__()]
         if self.show_forces:
             [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen.__iter__()]

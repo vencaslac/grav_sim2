@@ -48,7 +48,7 @@ def generate_sprite(taip=0,radius=0,surface_radius=0,sprite=np.array,color=(0,0,
             else:
                 for k in range(3):
                     if scale < surface_radius/radius:
-                        sprite[i,j,k]=round(int(color[k]-color[k]*scale*randint(1,80)/100))
+                        sprite[i,j,k]=round(int(color[k]-color[k]*scale*randint(40,90)/100))
                     else:
                         sprite[i,j,k]=round(int(color[k]-color[k]*scale))
 

@@ -14,7 +14,7 @@ class Sim:
         self.particles=[Particle(str(i),np.array((float(randint(0,self.SPREAD)),float(randint(0,self.SPREAD)))),
                         min(self.M_SPREAD,round(int(self.M_SPREAD*randint(1,self.M_SPREAD)/randint(1,self.M_SPREAD)**2))+1),
                         randint(1,self.D_SPREAD),self.G) for i in range(self.N_PARTS)]
-        self.particles.sort(key=lambda p:p.temperature)
+        self.particles.sort(key=lambda p:p.radius)
         self.flags={
                     'show_field':False,
                     'show_forces':False,

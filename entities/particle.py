@@ -14,7 +14,8 @@ class Particle:
         self.radius=math.sqrt(self.mass/self.density)
         self.temperature=self.compute_temp(G)
         self.color=self.compute_color()
-        self.sprite=self.build_sprite()
+        self.sprite_it=0
+        self.sprites=[self.build_sprite() for i in range(30)]
         self.vel=np.array([0,0])
         self.acc=np.array([0,0])
 
@@ -71,8 +72,10 @@ class Particle:
         #                     (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
         #                     int(self.radius)
         #                 )
-        self.sprite=self.build_sprite()
-        surface.blit(self.sprite,(int(round(self.coords[0]-cpos[0]-self.radius)),int(round(self.coords[1]-cpos[1]-self.radius))))
+        if self.sprite_it>29:
+            self.sprite_it=0
+        surface.blit(self.sprites[self.sprite_it],(int(round(self.coords[0]-cpos[0]-self.radius)),int(round(self.coords[1]-cpos[1]-self.radius))))
+        self.sprite_it+=1
 
     def draw_forces(self,surface,cpos):
         fx=self.mass*self.acc[0]

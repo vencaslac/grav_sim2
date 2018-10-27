@@ -47,7 +47,7 @@ class World:
     def update(self):
         '''updates the display'''
         self.sim.time_step()
-        self.display.fill((0,50,100))
+        self.display.fill((0,0,0))
 
         if self.camera_lock:
             self.cpos = (int(round(self.sim.particles[self.focus_particle].coords[0]-self.win_size[0]//2)),\
@@ -68,6 +68,7 @@ class World:
             if p.coords[0]<self.cpos[0]+self.win_size[0] and p.coords[1]<self.cpos[1]+self.win_size[1]:
                 on_screen.append(self.sim.particles.index(p))
 
+        self.sim.particles[self.focus_particle].sprite=self.sim.particles[self.focus_particle].build_sprite()
         [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen.__iter__()]
         if self.show_forces:
             [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen.__iter__()]

@@ -49,7 +49,7 @@ class Particle:
 
     def build_sprite(self):
         sp=np.zeros((int(round(self.radius*2)),int(round(self.radius*2)),3))
-        srf = pygame.surfarray.make_surface(generate_sprite('star',self.radius,0,sp,self.color))
+        srf = pygame.surfarray.make_surface(generate_sprite(0,self.radius,self.radius/2,sp,self.color))
         #srf.flags = pygame.SRCALPHA
 
         return srf
@@ -71,7 +71,8 @@ class Particle:
         #                     (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
         #                     int(self.radius)
         #                 )
-        surface.blit(self.sprite,(int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))))
+        self.sprite=self.build_sprite()
+        surface.blit(self.sprite,(int(round(self.coords[0]-cpos[0]-self.radius)),int(round(self.coords[1]-cpos[1]-self.radius))))
 
     def draw_forces(self,surface,cpos):
         fx=self.mass*self.acc[0]

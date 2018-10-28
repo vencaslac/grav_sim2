@@ -1,20 +1,20 @@
 import pygame
-
+from random import randint
 from utils import *
 from .particle import *
 
 class Sim:
 
     def __init__(self,N_PARTS=0,SPREAD=0,M_SPREAD=0,D_SPREAD=1,G=0):
+        self.G=G#6.674e-11
         self.N_PARTS=N_PARTS
         self.SPREAD=SPREAD
         self.M_SPREAD=M_SPREAD
         self.D_SPREAD=D_SPREAD
         self.particles=[Particle(str(i),np.array((float(randint(0,self.SPREAD)),float(randint(0,self.SPREAD)))),
                         min(self.M_SPREAD,round(int(self.M_SPREAD*randint(1,self.M_SPREAD)/randint(1,self.M_SPREAD)**2))+1),
-                        randint(1,self.D_SPREAD)) for i in range(self.N_PARTS)]
-        self.particles.sort(key=lambda p:p.mass)
-        self.G=G#6.674e-11
+                        randint(1,self.D_SPREAD),self.G) for i in range(self.N_PARTS)]
+        self.particles.sort(key=lambda p:p.temperature)
         self.flags={
                     'show_field':False,
                     'show_forces':False,

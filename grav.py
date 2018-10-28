@@ -49,12 +49,20 @@ while not egzit:
                     w.show_grid=False
                 else:
                     w.show_grid=True
-                    
+
             elif event.key == pygame.K_f:
                 if w.show_forces:
                     w.show_forces=False
                 else:
                     w.show_forces=True
+
+    os.system('cls')
+    testpar=w.sim.particles[w.focus_particle]
+    print('Name:{}\n'.format(str(testpar.name)))
+    print('Mass:{}\n'.format(str(testpar.mass)))
+    print('Density:{}\n'.format(str(testpar.density)))
+    print('Radius:{}\n'.format(str(testpar.radius)))
+    print('Temperature:{}\n'.format(str(testpar.temperature)))
 
     w.update()
 

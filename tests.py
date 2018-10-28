@@ -1,7 +1,7 @@
-import time
-import os
-from random import randint
+with open('stars.txt','rt') as f:
+    stars = f.read().replace('\n\n','\n')
+    stars=stars.replace('\n',',')
+    stars=stars.replace(',,',',')
+    stars=stars.replace(',',"',\\\n'")
 
-
-for i in range(800):
-    print(min(765,round(int(765*randint(1,765)/randint(1,765)**2))+1))
+print(stars)

@@ -1,6 +1,5 @@
 import numpy as np
 import pygame
-import math
 from utils import *
 
 
@@ -11,11 +10,11 @@ class Particle:
         self.coords = coords
         self.density = min(density,mass)
         self.mass = mass
-        self.radius=math.sqrt(self.mass/self.density)
+        self.radius=(self.mass/self.density)**0.5
         self.temperature=self.compute_temp(G)
         self.color=self.compute_color()
         self.sprite_it=0
-        self.sprites=[self.build_sprite() for i in range(30)]
+        self.sprites=[self.build_sprite() for i in range(3)]
         self.vel=np.array([0,0])
         self.acc=np.array([0,0])
 
@@ -51,7 +50,7 @@ class Particle:
     def build_sprite(self):
         sp=np.zeros((int(round(self.radius*2)),int(round(self.radius*2)),3))
         srf = pygame.surfarray.make_surface(generate_sprite(0,self.radius,self.radius/2,sp,self.color))
-        #srf.flags = pygame.SRCALPHA
+        srf.set_colorkey((0,0,0))
 
         return srf
 
@@ -72,7 +71,7 @@ class Particle:
         #                     (int(round(self.coords[0]-cpos[0])),int(round(self.coords[1]-cpos[1]))),
         #                     int(self.radius)
         #                 )
-        if self.sprite_it>29:
+        if self.sprite_it>2:
             self.sprite_it=0
         surface.blit(self.sprites[self.sprite_it],(int(round(self.coords[0]-cpos[0]-self.radius)),int(round(self.coords[1]-cpos[1]-self.radius))))
         self.sprite_it+=1

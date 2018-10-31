@@ -8,8 +8,8 @@ class World:
     def __init__(self):
         self.cfg = json.load(open('settings.cfg'))
         self.win_size = [int(item) for item in self.cfg['Graphics']['window_size'].split(',')]
-        self.sim = self.configure_sim()
         self.display = self.init_display()
+        self.sim = self.configure_sim()
         self.cpos = (0,0)
         self.focus_particle = -1
         self.camera_lock = False
@@ -20,7 +20,6 @@ class World:
         ''' instantiates the simulation based on parameters given in
             the settings.cfg file which is a simple json
         '''
-
         return Sim(int(self.cfg['Sim']['Particles']['N_PARTS']),\
                     int(self.cfg['Sim']['Particles']['SPREAD']),\
                     int(self.cfg['Sim']['Particles']['M_SPREAD']),\
@@ -45,7 +44,7 @@ class World:
         return pygame.display.set_mode(self.win_size,modes)
 
     def update(self):
-        '''updates the display'''
+        '''updates the application by one step'''
         self.sim.time_step()
         self.display.fill((0,0,0))
 

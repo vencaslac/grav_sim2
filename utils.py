@@ -38,6 +38,10 @@ def build_field(g,masses,pixels,coords):
 
 @jit(parallel=True)
 def generate_sprite(taip=0,radius=0,surface_radius=0,sprite=np.array,color=(0,0,0,0)):
+    ''' returns a square numpy array of pixel values
+        the object is depicted as two noisy grandient filled concentric circles
+        the outer most of which is tangent to the square
+    '''
     sprite=sprite
     for i in range(sprite.shape[0]):
         for j in range(sprite.shape[1]):
@@ -51,7 +55,6 @@ def generate_sprite(taip=0,radius=0,surface_radius=0,sprite=np.array,color=(0,0,
                         sprite[i,j,k]=round(int(color[k]-color[k]*scale*randint(40,90)/100))
                     else:
                         sprite[i,j,k]=round(int(color[k]-color[k]*scale))
-
     return sprite
 
 @jit(parallel=True)

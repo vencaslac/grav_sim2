@@ -3,6 +3,8 @@ from random import randint,choice
 from utils import *
 from .particle import *
 
+
+#TODO move this to some kind of constants file
 s_names=[
         'Acamar',\
         'Achernar',\
@@ -400,6 +402,13 @@ class Sim:
         [p.move() for p in self.particles]
 
     def pick_star_name(self):
+        '''
+            picks a name for a star from the available list, if the list is depleted
+            a randomized name is generated and made to look sciency by using the actual
+            OBFGKM spectral types
+        '''
+
+        #TODO make this function output more realistic names
 
         try:
             name = choice(self.star_names)
@@ -410,4 +419,8 @@ class Sim:
         return name
 
     def time_step(self):
+        '''
+            Steps the simulation forward by one time_step
+        '''
+
         self.apply_gravity()

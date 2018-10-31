@@ -35,3 +35,8 @@ console window.
   - Lowercase 'm' and 'n' cycle between particles from hottest to coolest
   - Lowercase 'f' toggles the display of force vectors on top of the particles
   - Lowercase 'g' toggles the display of the cartesian grid giving a better understanding of the relative motion of particles
+
+### Why number 2? What happened to 1?
+
+The first installment is languishing on a hard drive somewhere from the time I did not know how to use Git. This is a
+significantly optimized version with a lot less spaghetti code written by a hopefully more competent programmer.

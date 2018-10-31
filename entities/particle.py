@@ -60,7 +60,6 @@ class Particle:
         '''
 
         sp=np.zeros((int(round(self.radius*2)),int(round(self.radius*2)),3))
-        print(sp.shape)
         srf = pygame.surfarray.make_surface(generate_sprite(0,self.radius,self.radius/2,sp,self.color))
         srf.set_colorkey((0,0,0))
         return srf

@@ -70,5 +70,6 @@ class World:
         [self.sim.particles[p].draw(self.display,self.cpos) for p in on_screen.__iter__()]
         if self.show_forces:
             [self.sim.particles[p].draw_forces(self.display,self.cpos) for p in on_screen.__iter__()]
+            self.sim.particles[self.focus_particle].draw_tooltip(self.display,self.cpos)
 
         pygame.display.update()

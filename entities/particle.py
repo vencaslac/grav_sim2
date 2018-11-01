@@ -108,14 +108,14 @@ class Particle:
                         (self.coords[0]-cpos[0]+fx*100,self.coords[1]-cpos[1]+fy*100),3)
 
     def build_tooltip(self,screen_size):
-
-        tooltip = pygame.Surface((screen_size[0]//5,screen_size[1]//3),pygame.SRCALPHA | pygame.HWSURFACE | pygame.HWACCEL)
+        size=((screen_size[0]//5,screen_size[1]*2//3))
+        tooltip = pygame.Surface(size,pygame.SRCALPHA | pygame.HWSURFACE | pygame.HWACCEL)
         tooltip.fill((0,0,0,200))
-        pygame.draw.rect(tooltip,(255,255,255,128),pygame.Rect(0,0,screen_size[0]//5,screen_size[1]//3),3)
+        pygame.draw.rect(tooltip,(255,255,255,128),pygame.Rect(0,0,size[0],size[1]),3)
 
         return tooltip
 
     def draw_tooltip(self,surface,cpos):
         t=self.build_tooltip(surface.get_size())
-        pygame.draw.line(surface,(255,255,255,128),(self.coords[0]-cpos[0],self.coords[1]-cpos[1]),(surface.get_size()[0]*4//5,surface.get_size()[1]//3),2)
-        surface.blit(t,(surface.get_size()[0]*4//5,surface.get_size()[1]//9))
+        pygame.draw.line(surface,(255,255,255,128),(self.coords[0]-cpos[0],self.coords[1]-cpos[1]),(surface.get_size()[0]*3.75//5,surface.get_size()[1]//3),2)
+        surface.blit(t,(surface.get_size()[0]*3.75//5,surface.get_size()[1]//9))
